@@ -40,7 +40,7 @@ export default class FormularioRegister extends Component {
                     imagenPerfil: ''
                 })
                 .then(
-                    () => this.props.navigation.navigate('navegacion')
+                    () => this.props.navigation.navigate('Login')
                 )
 
                 

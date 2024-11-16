@@ -48,20 +48,8 @@ export default class FormularioHome extends Component {
                 onChangeText={(texto) => this.setState({ username: texto})}
                 value={this.state.username}
             />
-            <TextInput
-                style={styles.input}
-                keyboardType='default'
-                placeholder='Que quieres comentar?'
-                onChangeText={(texto) => this.setState({ comentario: texto}) }
-                value={this.state.comentario}
-            />
-            <TouchableOpacity
-                onPress={() => this.enviarComentario()}
-            >
-                <Text>
-                    Comentar
-                </Text>
-            </TouchableOpacity>
+           
+           
         </View>
       </View>
     )
