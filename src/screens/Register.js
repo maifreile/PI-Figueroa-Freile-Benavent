@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, TouchableOpacityBase } from 'react-native'
+import { Text, View, TouchableOpacity,  } from 'react-native'
 import React, { Component } from 'react'
 import FormularioRegister from '../components/FormularioRegister'
 

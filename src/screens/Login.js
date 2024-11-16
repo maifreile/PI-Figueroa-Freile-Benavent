@@ -8,13 +8,8 @@ export default class Login extends Component {
         super(props)
     }
 
-    componentDidMount(){
-      auth.onAuthStateChanged(user => {
-        if (user) {
-          this.props.navigation.navigate("logueado")
-        } 
-      })
-    }
+    componentDidMount(){}
+   
 
     irARegister(){
         this.props.navigation.navigate('register')
