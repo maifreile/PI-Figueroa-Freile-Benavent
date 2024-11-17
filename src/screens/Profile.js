@@ -69,47 +69,45 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#f9f9f9',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f4f8', // Color de fondo suave
+    padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 18,
     marginBottom: 20,
-    color: '#555',
+    color: '#5e35b1',
+    textAlign: 'center'
+  },
+  subtitle:{
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#7f7f7f', // Color principal de la aplicación
+    marginBottom: 20,
   },
   username: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#2980b9',
     marginBottom: 30,
   },
   loading: {
     fontSize: 16,
-    color: '#aaa',
+    color: '#7f8c8d',
     marginBottom: 30,
   },
   signOutButton: {
-    backgroundColor: '#ff4d4d',
+    backgroundColor: '#e74c3c',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 3,
-    elevation: 4,
   },
   signOutButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#ffffff',
     textAlign: 'center',
   },
 });

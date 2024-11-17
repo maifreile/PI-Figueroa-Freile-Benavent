@@ -8,7 +8,6 @@ const Stack = createNativeStackNavigator()
 
 export default class NavegacionPrincipal extends Component {
  
-  
   render() {
     
     return (
