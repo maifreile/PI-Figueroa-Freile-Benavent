@@ -1,12 +1,37 @@
-import { Text, View } from 'react-native';
-import React, { Component } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet} from "react-native"
+import { Component } from 'react'
 
-export default class Home extends Component {
-  render() {
-    return (
-      <View>
-        <Text>Home</Text>
-      </View>
-    );
-  }
+class Home extends Component{
+constructor(props){
+    super(props)
+    this.state={
+        user: ''
+    }
 }
+ 
+ComponentDidMount(){
+    console.log('Se monto mi componente')
+}
+
+
+render(){
+    return(
+        <View style={styles.container}>
+            <Text style={styles.text}>Momentos perrunos</Text>
+        </View>
+    )
+}}
+
+const styles = StyleSheet.create({
+    container: {
+        textAlign : 'center', 
+        padding: 10,
+        flex: 1
+    },
+    text: {
+        textAlign: 'center'
+    }
+})
+
+
+export default Home;
