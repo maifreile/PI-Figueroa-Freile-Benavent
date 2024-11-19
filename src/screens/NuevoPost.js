@@ -26,24 +26,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 10,
-    },
-    text: {
-        fontSize: 20,
-        fontWeight: "bold",
-        marginVertical: 10,
-        textAlign: "center",
-    },
-    loginButton: {
-        backgroundColor: "#6200ee",
-        padding: 15,
-        borderRadius: 5,
-        marginTop: 20,
-    },
-    loginButtonText: {
-        color: "#fff",
-        fontWeight: "bold",
-        textAlign: "center",
-    },
+    }
 });
 
 export default NuevoPost;

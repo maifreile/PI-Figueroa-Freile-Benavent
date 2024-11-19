@@ -13,11 +13,11 @@ export default class NavegacionPrincipal extends Component {
   render() {
     
     return (
-        <Stack.Navigator initialRouteName="newpost">
-          <Stack.Screen name="home" component={Home} options={{ headerShown: false }} />
+        <Stack.Navigator>
             <Stack.Screen name='register' component={Register}  options={{headerShown: false}} />
             <Stack.Screen name="logueado" component={NavegacionAnidada} options={{ headerShown: false }} />
             <Stack.Screen name='login' component={Login} options={{headerShown: false}} />
+            <Stack.Screen name="home" component={NavegacionAnidada} options={{ headerShown: false }} />
             <Stack.Screen name='newpost' component={NavegacionAnidada} options={{headerShown: false}} />
         </Stack.Navigator>
     )

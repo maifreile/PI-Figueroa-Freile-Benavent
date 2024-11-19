@@ -56,7 +56,7 @@ class FormularioNuevoPost extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.formContainer}>
-          <Text style={styles.title}>¡Comparte con tus amigos!</Text>
+          <Text style={styles.title}>¡Comparte algo con tus amigos!</Text>
           <TextInput
             style={styles.input}
             placeholder="Texto"
@@ -64,9 +64,9 @@ class FormularioNuevoPost extends Component {
             onChangeText={(texto) => this.setState({ texto, error: "" })}
             value={this.state.texto}
           />
-          {this.state.error !== "" && <Text style={styles.errorText}>{this.state.error}</Text>}
-          <TouchableOpacity onPress={() => this.submit(this.state.texto)} style={styles.button}>
-            <Text style={styles.buttonText}>Publicar</Text>
+          {this.state.error !== "" && <Text style={styles.error}>{this.state.error}</Text>}
+          <TouchableOpacity onPress={() => this.submit(this.state.texto)} style={styles.boton}>
+            <Text style={styles.botonTexto}>Publicar</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    width: "100%",
+    width: "80%",
+    alignSelf: 'center',
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderWidth: 2,
@@ -109,20 +110,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: "#ffffff",
   },
-  button: {
-    backgroundColor: "#bfa2d8",
+  boton: {
+    backgroundColor: "#b0a6da",
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderRadius: 8,
+    borderRadius: 40,
     marginTop: 10,
+    width: "46%", 
+    display: 'flex',
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
-  buttonText: {
+  botonTexto: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
   },
-  errorText: {
+  error: {
     color: "#d32f2f",
     marginVertical: 10,
     textAlign: "center",
