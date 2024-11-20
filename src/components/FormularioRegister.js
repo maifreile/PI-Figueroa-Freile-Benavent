@@ -3,98 +3,92 @@ import React, { Component } from 'react'
 import { auth, db } from '../firebase/config'
 
 export default class FormularioRegister extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             email: '',
-            username:'',
-            password:'',
-            error:''
+            username: '',
+            password: '',
+            error: ''
         }
     }
 
-    submit(email, username, password){
-        if(!email.includes('@')){
-            this.setState({error: 'Ingrese un formato de email válido'})
-            return
-        }
-        
-        if(username.length < 2){
-            this.setState({error: 'Ingrese un nombre de usuario'})
-            return
-        }
+    validacionForm() {
+        const { email, username, password } = this.state;
+        return email.includes('@') && username.length >= 2 && password.length >= 5;
+    }
 
-        if(password.length < 5){
-            this.setState({error: 'Ingrese una contraseña más larga'})
-            return
-        }
+    submit(email, username, password) {
+        if (!this.validacionForm()) return;
 
         auth.createUserWithEmailAndPassword(email, password)
-        .then((user) => {
-            if(user){
-                db.collection('users').add({
-                    owner: auth.currentUser.email,
-                    createdAt: Date.now(),
-                    username: username,
-                })
-                .then(
-                    () => this.props.navigation.navigate('login')
-                )
-
-            }
-        })
-        .catch(err => {
-            if (err.code === "auth/email-already-in-use"){
-                this.setState({error: 'El email ya esta en uso'})
-            }
-        })
-
+            .then((user) => {
+                if (user) {
+                    db.collection('users').add({
+                        owner: auth.currentUser.email,
+                        createdAt: Date.now(),
+                        username: username,
+                    })
+                        .then(
+                            () => this.props.navigation.navigate('login')
+                        )
+                }
+            })
+            .catch(err => {
+                if (err.code === "auth/email-already-in-use") {
+                    this.setState({ error: 'El email ya está en uso' })
+                }
+            })
     }
 
     render() {
+        const Valido = this.validacionForm();
+
         return (
-        <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <Text style={styles.title}>Occogram</Text>
-                <Text style={styles.subtitle}>Registrate para ver fotos y videos de tus amigos.</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Ingrese su correo'
-                    keyboardType='email-address'
-                    onChangeText={(text) => this.setState({email: text, error: ''})}
-                    value={this.state.email}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Ingrese su username'
-                    keyboardType='default'
-                    onChangeText={(text) => this.setState({username: text, error: ''})}
-                    value={this.state.username}
-                />
-            
-                <TextInput
-                    value={this.state.password}
-                    style={styles.input}
-                    placeholder='Ingrese su password'
-                    keyboardType='default'
-                    onChangeText={(text) => this.setState({password: text, error: ''})}
-                    secureTextEntry={true}
-                />
-                {
-                    this.state.error !== '' 
-                    &&
-                    <Text style={styles.errorText}>
-                        {this.state.error}
-                    </Text>
-                }
-                <TouchableOpacity
-                    onPress={()=> this.submit(this.state.email, this.state.username, this.state.password)}
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonText}>Registrarte</Text>
-                </TouchableOpacity>
+            <View style={styles.container}>
+                <View style={styles.formContainer}>
+                    <Text style={styles.title}>Occogram</Text>
+                    <Text style={styles.subtitle}>Registrate para ver fotos y videos de tus amigos.</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Ingrese su correo'
+                        keyboardType='email-address'
+                        onChangeText={(text) => this.setState({ email: text, error: '' })}
+                        value={this.state.email}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Ingrese su username'
+                        keyboardType='default'
+                        onChangeText={(text) => this.setState({ username: text, error: '' })}
+                        value={this.state.username}
+                    />
+                    <TextInput
+                        value={this.state.password}
+                        style={styles.input}
+                        placeholder='Ingrese su password'
+                        keyboardType='default'
+                        onChangeText={(text) => this.setState({ password: text, error: '' })}
+                        secureTextEntry={true}
+                    />
+                    {
+                        this.state.error !== ''
+                        &&
+                        <Text style={styles.errorText}>
+                            {this.state.error}
+                        </Text>
+                    }
+                    {
+                        Valido &&
+                        <TouchableOpacity
+                            onPress={() => this.submit(this.state.email, this.state.username, this.state.password)}
+                            style={styles.button}
+                        >
+                            <Text style={styles.buttonText}>Registrarte</Text>
+                        </TouchableOpacity>
+                    }
+                </View>
             </View>
-        </View>
         )
     }
 }
@@ -114,15 +108,15 @@ const styles = StyleSheet.create({
         borderColor: '#bebebe', // Color del borde
         borderRadius: 8,
         padding: 50, // Espaciado interno
-      },
-    title: {
-      textAlign: 'center',
-      fontSize: 32,
-      fontWeight: 'bold',
-      color: '#5e35b1', // Color principal de la aplicación
-      marginBottom: 20,
     },
-    subtitle:{
+    title: {
+        textAlign: 'center',
+        fontSize: 32,
+        fontWeight: 'bold',
+        color: '#5e35b1', // Color principal de la aplicación
+        marginBottom: 20,
+    },
+    subtitle: {
         fontSize: 18,
         textAlign: 'center',
         color: '#7f7f7f', // Color principal de la aplicación
@@ -137,10 +131,9 @@ const styles = StyleSheet.create({
         borderColor: '#D3C6E5',
         marginVertical: 10,
         borderRadius: 8,
-        fontSize:16,
+        fontSize: 16,
         backgroundColor: '#ffffff', // Fondo blanco para los inputs
         shadowColor: '#000',
-       
     },
     buttonText: {
         backgroundColor: '#bfa2d8', // Color del botón
@@ -154,7 +147,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     errorText: {
-        color: '#d32f2f', 
+        color: '#d32f2f',
         marginVertical: 10,
     },
 });
