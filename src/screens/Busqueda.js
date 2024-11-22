@@ -12,7 +12,9 @@ export default class Busqueda extends Component {
     }
 
     componentDidMount(){
-        db.collection('users').onSnapshot((docs)=> {
+        db
+        .collection('users')
+        .onSnapshot((docs)=> {
             let arrDocs = []
 
             docs.forEach((doc) => arrDocs.push({
@@ -53,7 +55,8 @@ export default class Busqueda extends Component {
             onChangeText={event => this.controlarInputs(event)}
             value={search}
         />
-        {filterUsers.length > 0 ? (
+        {search.length >0 && filterUsers.length > 0 
+            ? (
             <FlatList
                 data={filterUsers}
                 keyExtractor={(item) => item.id.toString()}
@@ -62,6 +65,7 @@ export default class Busqueda extends Component {
                 )}
             />
         ) : (
+            search.length >0 &&
             <Text style={styles.noUser }>El nombre de usuario no existe</Text>
         )}
     </View>
@@ -73,7 +77,7 @@ export default class Busqueda extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f0f4f8', // Color de fondo suave
+        backgroundColor: '#f0f4f8', 
         padding: 20,
     },
     input: {
@@ -86,18 +90,18 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderRadius: 8,
         fontSize: 16,
-        backgroundColor: '#ffffff', // Fondo blanco para el input
+        backgroundColor: '#ffffff', 
         shadowColor: '#000',
     },
     userText: {
         fontSize: 18,
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#FADADD', // Color de borde suave para separación
+        borderBottomColor: '#FADADD', 
     },
     noUser:  {
         fontSize: 16,
-        color: '#dc3545', // Color rojo para el mensaje de error
+        color: '#dc3545', 
         textAlign: 'center',
         marginTop: 20,
     },

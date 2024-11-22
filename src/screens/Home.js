@@ -1,6 +1,7 @@
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import React, { Component } from "react";
 import { db, auth } from "../firebase/config";
+import Like from "../components/Like";
 
 class Home extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class Home extends Component {
   componentDidMount() {
     console.log("Se montó mi componente");
 
-    db.collection("posts")
+    db
+      .collection("posts")
       .orderBy("createdAt", "desc")
       .onSnapshot((docs) => {
         let posts = [];
@@ -21,27 +23,24 @@ class Home extends Component {
           posts.push({
             id: doc.id,
             data: doc.data(),
-          });
-        });
+          })
+        })
         this.setState({
           posteos: posts,
-        });
-      });
+        })
+      })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Todos los posts</Text>
-        <FlatList data={this.state.posteos} keyExtractor={(item) => item.id.toString()} numColumns={2} renderItem={({ item }) => (
-            <View style={styles.postContainer}>
-              <Text style={styles.email}>{item.data.owner} publicó: </Text>
-              <Text style={styles.texto}>{item.data.texto}</Text>
-              <TouchableOpacity style={styles.botonlike} onPress={() => console.log('like')}>
-                <Text style={styles.textoBotonLike}>Like</Text>
-              </TouchableOpacity>
-              <Text style={styles.likes}>Likes: {item.data.likes.length}</Text>
-            </View>
+        <Text style={styles.title}>Occogram posts</Text>
+        <FlatList 
+          data={this.state.posteos} 
+          keyExtractor={(item) => item.id.toString()} 
+          numColumns={2} 
+          renderItem={({ item }) => (
+            <Like item={item}/>
           )}
         />
       </View>

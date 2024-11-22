@@ -1,7 +1,6 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import React, { Component } from "react";
-import { db } from "../firebase/config";
-import { auth } from "../firebase/config"; 
+import { db, auth } from "../firebase/config";
 
 class FormularioNuevoPost extends Component {
   constructor(props) {
@@ -37,7 +36,7 @@ class FormularioNuevoPost extends Component {
           owner: usuario.email, 
           createdAt: Date.now(), 
           texto: texto, 
-          likes: [], 
+          arrLikes: [], 
         })
         .then(() => {
           this.props.navigation.navigate("home"); 

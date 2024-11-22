@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#f0f4f8', // Color de fondo suave
+      backgroundColor: '#f0f4f8', 
       padding: 20,
   },
 
   loginButton: {
-      backgroundColor: '#81c784', // Color pastel para el botón
+      backgroundColor: '#81c784', 
       paddingVertical: 15,
       paddingHorizontal: 20,
       borderRadius: 8,
@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: '#5e35b1', // Color pastel para el texto de aviso
+    color: '#5e35b1',
     textAlign: 'center',
     marginTop: 20,
-    fontStyle: 'italic', // Estilo en cursiva para el texto
+    fontStyle: 'italic', 
 },
 });

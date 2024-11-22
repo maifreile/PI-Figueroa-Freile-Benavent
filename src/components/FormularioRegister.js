@@ -98,28 +98,28 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f0f4f8', // Color de fondo suave
+        backgroundColor: '#f0f4f8', 
         padding: 20,
     },
     formContainer: {
         width: '90%',
-        backgroundColor: '#f0f4f8', // Mismo color de fondo
-        borderWidth: 1, // Borde fino
-        borderColor: '#bebebe', // Color del borde
+        backgroundColor: '#f0f4f8', 
+        borderWidth: 1, 
+        borderColor: '#bebebe', 
         borderRadius: 8,
-        padding: 50, // Espaciado interno
+        padding: 50, 
     },
     title: {
         textAlign: 'center',
         fontSize: 32,
         fontWeight: 'bold',
-        color: '#5e35b1', // Color principal de la aplicación
+        color: '#5e35b1', 
         marginBottom: 20,
     },
     subtitle: {
         fontSize: 18,
         textAlign: 'center',
-        color: '#7f7f7f', // Color principal de la aplicación
+        color: '#7f7f7f', 
         marginBottom: 20,
     },
     input: {
@@ -132,11 +132,11 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderRadius: 8,
         fontSize: 16,
-        backgroundColor: '#ffffff', // Fondo blanco para los inputs
+        backgroundColor: '#ffffff', 
         shadowColor: '#000',
     },
     buttonText: {
-        backgroundColor: '#bfa2d8', // Color del botón
+        backgroundColor: '#bfa2d8', 
         paddingVertical: 15,
         paddingHorizontal: 20,
         textAlign: "center",

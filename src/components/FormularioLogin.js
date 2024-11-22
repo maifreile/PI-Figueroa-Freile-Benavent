@@ -12,6 +12,13 @@ export default class FormularioLogin extends Component {
             error: ''
         }
     }
+    componentDidMount(){
+        auth.onAuthStateChanged(user => {
+          if (user) {
+            this.props.navigation.navigate("logueado")
+          } 
+        })
+      }
 
     submit(email,password){
         if (!email.includes('@')) {
@@ -80,22 +87,22 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#f0f4f8', // Fondo blanco
+      backgroundColor: '#f0f4f8', 
       padding: 20,
   },
   formContainer: {
     width: '90%',
-    backgroundColor: '#f0f4f8', // Mismo color de fondo
-    borderWidth: 1, // Borde fino
-    borderColor: '#bebebe', // Color del borde
+    backgroundColor: '#f0f4f8', 
+    borderWidth: 1, 
+    borderColor: '#bebebe',
     borderRadius: 8,
-    padding: 50, // Espaciado interno
+    padding: 50, 
   },
   title: {
       textAlign: 'center',
       fontSize: 32,
       fontWeight: 'bold',
-      color: '#5e35b1', // Color principal de la aplicación
+      color: '#5e35b1', 
       marginBottom: 20,
   },
   input: {
@@ -104,14 +111,14 @@ const styles = StyleSheet.create({
       paddingVertical: 10,
       paddingHorizontal: 15,
       borderWidth: 2,
-      borderColor: '#D3C6E5', // Color de borde
+      borderColor: '#D3C6E5',
       marginVertical: 10,
       borderRadius: 8,
       fontSize: 16,
-      backgroundColor: '#f0f4f8', // Fondo suave para los inputs
+      backgroundColor: '#f0f4f8', 
   },
   buttonText: {
-      backgroundColor: '#bfa2d8', // Color del botón
+      backgroundColor: '#bfa2d8', 
       paddingVertical: 15,
       paddingHorizontal: 20,
       textAlign: "center",
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
       marginTop: 10,
   },
   errorText: {
-      color: '#d32f2f', // Color rojo para los errores
+      color: '#d32f2f', 
       marginVertical: 10,
   }
 });
