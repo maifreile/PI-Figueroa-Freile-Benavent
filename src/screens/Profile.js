@@ -17,7 +17,7 @@ export default class Profile extends Component {
     if (currentUserEmail) {
       console.log('Usuario actual:', currentUserEmail);
 
-      // Obtener información del usuario
+      // Obtiene la info del usuario
       db.collection('users')
         .where('owner', '==', currentUserEmail)
         .onSnapshot((docs) => {
@@ -32,7 +32,7 @@ export default class Profile extends Component {
           this.setState({ userInfo: arrDocs });
         });
 
-      // Obtener publicaciones del usuario
+      // Obtiene las publicaciones del usuario
       db.collection('posts')
         .where('owner', '==', currentUserEmail)
         .onSnapshot((docs) => {
@@ -85,7 +85,7 @@ export default class Profile extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Perfil</Text>
 
-        {/* Mostrar nombre de usuario y correo */}
+      
         {this.state.userInfo.length > 0 && (
           <>
             <Text style={styles.username}>
@@ -97,12 +97,11 @@ export default class Profile extends Component {
           </>
         )}
 
-        {/* Mostrar cantidad de posteos */}
         <Text style={styles.postCount}>
           Cantidad de publicaciones: {this.state.userPosts.length}
         </Text>
 
-        {/* Listar publicaciones */}
+ 
         <FlatList
           data={this.state.userPosts}
           keyExtractor={(item) => item.id}
@@ -119,7 +118,7 @@ export default class Profile extends Component {
           )}
         />
 
-        {/* Botón para cerrar sesión */}
+        
         <TouchableOpacity style={styles.signOutButton} onPress={this.SignOut}>
           <Text style={styles.signOutButtonText}>Cerrar sesión</Text>
         </TouchableOpacity>

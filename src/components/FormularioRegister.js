@@ -9,89 +9,143 @@ export default class FormularioRegister extends Component {
             email: '',
             username: '',
             password: '',
+            errorEmail: '',
+            errorPassword: '',
+            errorUsername: '',
             error: ''
         }
     }
+//Voy hacer una validacion para cada categroia
+validacionEmail(email) {
+    return email.includes('@');
+}
 
-    validacionForm() {
-        const { email, username, password } = this.state;
-        return email.includes('@') && username.length >= 2 && password.length >= 5;
+validacionPassword(password) {
+    return password.length >= 5;
+}
+
+validacionUsername(username) {
+    return username.length >= 2;
+}
+
+VerificarEmail() {
+    const { email } = this.state;
+
+    if (email === '') {
+        this.setState({ errorEmail: 'El campo de email no puede estar vacío.' });
+        return false;
+    } else if (!this.validacionEmail(email)) {
+        this.setState({ errorEmail: 'Email debe utilizar un @.' });
+        return false;
+    } else {
+        this.setState({ errorEmail: '' });
+        return true;
     }
+}
+VerificarPassword() {
+    const { password } = this.state;
 
-    submit(email, username, password) {
-        if (!this.validacionForm()) return;
+    if (password === '') {
+        this.setState({ errorPassword: 'El campo de contraseña no puede estar vacío.' });
+        return false;
+    } else if (!this.validacionPassword(password)) {
+        this.setState({ errorPassword: 'La contraseña debe tener una longitud mínima de 5 caracteres.' });
+        return false;
+    } else {
+        this.setState({ errorPassword: '' });
+        return true;
+    }
+}
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .then((user) => {
-                if (user) {
+VerificarUsername() {
+    const { username } = this.state;
+
+    if (username === '') {
+        this.setState({ errorUsername: 'El campo de username no puede estar vacío.' });
+        return false;
+    } else if (!this.validacionUsername(username)) {
+        this.setState({ errorUsername: 'El username debe tener al menos 2 caracteres.' });
+        return false;
+    } else {
+        this.setState({ errorUsername: '' });
+        return true;
+    }
+}
+
+validacionForm() {
+    const { email, password, username } = this.state;
+    return email !== '' && password !== '' && username !== '';
+}
+    submit() {
+        const EmailValido = this.VerificarEmail();
+        const PasswordValido = this.VerificarPassword();
+        const UsernameValido = this.VerificarUsername();
+
+        if (EmailValido && PasswordValido && UsernameValido) {
+            auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
+                .then(() => {
                     db.collection('users').add({
-                        owner: auth.currentUser.email,
+                        owner: this.state.email,
                         createdAt: Date.now(),
-                        username: username,
+                        username: this.state.username,
                     })
-                        .then(
-                            () => this.props.navigation.navigate('login')
-                        )
-                }
-            })
-            .catch(err => {
-                if (err.code === "auth/email-already-in-use") {
-                    this.setState({ error: 'El email ya está en uso' })
-                }
-            })
+                        .then(() => this.props.navigation.navigate('login'))
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.setState({ error: error.message })
+                });
+        }
     }
 
     render() {
-        const Valido = this.validacionForm();
-
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <Text style={styles.title}>Occogram</Text>
                     <Text style={styles.subtitle}>Registrate para ver fotos y videos de tus amigos.</Text>
+
                     <TextInput
                         style={styles.input}
                         placeholder='Ingrese su correo'
                         keyboardType='email-address'
-                        onChangeText={(text) => this.setState({ email: text, error: '' })}
+                        onChangeText={(text) => this.setState({ email: text })}
                         value={this.state.email}
                     />
+                    {this.state.errorEmail ? <Text style={styles.errorText}>{this.state.errorEmail}</Text> : null}
+
                     <TextInput
                         style={styles.input}
                         placeholder='Ingrese su username'
-                        keyboardType='default'
-                        onChangeText={(text) => this.setState({ username: text, error: '' })}
+                        onChangeText={(text) => this.setState({ username: text })}
                         value={this.state.username}
                     />
+                    {this.state.errorUsername ? <Text style={styles.errorText}>{this.state.errorUsername}</Text> : null}
+
                     <TextInput
-                        value={this.state.password}
                         style={styles.input}
                         placeholder='Ingrese su password'
-                        keyboardType='default'
-                        onChangeText={(text) => this.setState({ password: text, error: '' })}
                         secureTextEntry={true}
+                        onChangeText={(text) => this.setState({ password: text })}
+                        value={this.state.password}
                     />
-                    {
-                        this.state.error !== ''
-                        &&
-                        <Text style={styles.errorText}>
-                            {this.state.error}
-                        </Text>
-                    }
-                    {
-                        Valido &&
-                        <TouchableOpacity
-                            onPress={() => this.submit(this.state.email, this.state.username, this.state.password)}
-                            style={styles.button}
-                        >
-                            <Text style={styles.buttonText}>Registrarte</Text>
-                        </TouchableOpacity>
-                    }
+                    {this.state.errorPassword ? <Text style={styles.errorText}>{this.state.errorPassword}</Text> : null}
+
+                    {this.state.error ? <Text style={styles.errorText}>{this.state.error}</Text> : null}
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        disabled={!this.validacionForm()}
+                        onPress={() => this.submit()}
+                    >
+                        <Text style={styles.buttonText}>Registrarme</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
-        )
+        );
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
