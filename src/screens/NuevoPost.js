@@ -1,14 +1,10 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Component } from "react";
 import FormularioNuevoPost from "../components/FormularioNuevoPost";
 
 class NuevoPost extends Component {
     constructor(props) {
         super(props)
-    }
-
-    componentDidMount() {
-        console.log("Se montó mi componente");
     }
 
     render() {

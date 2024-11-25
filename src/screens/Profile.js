@@ -85,7 +85,7 @@ export default class Profile extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Perfil</Text>
 
-      
+
         {this.state.userInfo.length > 0 && (
           <>
             <Text style={styles.username}>
@@ -101,7 +101,7 @@ export default class Profile extends Component {
           Cantidad de publicaciones: {this.state.userPosts.length}
         </Text>
 
- 
+
         <FlatList
           data={this.state.userPosts}
           keyExtractor={(item) => item.id}
@@ -118,7 +118,7 @@ export default class Profile extends Component {
           )}
         />
 
-        
+
         <TouchableOpacity style={styles.signOutButton} onPress={this.SignOut}>
           <Text style={styles.signOutButtonText}>Cerrar sesión</Text>
         </TouchableOpacity>

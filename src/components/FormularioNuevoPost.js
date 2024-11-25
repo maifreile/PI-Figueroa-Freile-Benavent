@@ -12,9 +12,9 @@ class FormularioNuevoPost extends Component {
   }
 
   publicadoExitosamente() {
-    this.setState({ texto: "", error: "" }); 
+    this.setState({ texto: "", error: "" });
     console.log("Posteo compartido exitosamente.");
-    this.props.navigation.navigate("home");
+    this.props.navigation.navigate("logueado");
   }
 
   submit(texto) {
@@ -24,22 +24,22 @@ class FormularioNuevoPost extends Component {
     }
 
     if (texto.length < 2) {
-        this.setState({ error: "ingrese texto mas largo" });
-        return;
-      }
+      this.setState({ error: "ingrese texto mas largo" });
+      return;
+    }
 
     const usuario = auth.currentUser;
 
     if (usuario) {
       db.collection("posts")
         .add({
-          owner: usuario.email, 
-          createdAt: Date.now(), 
-          texto: texto, 
-          arrLikes: [], 
+          owner: usuario.email,
+          createdAt: Date.now(),
+          texto: texto,
+          arrLikes: [],
         })
         .then(() => {
-          this.props.navigation.navigate("home"); 
+          this.props.navigation.navigate("home");
           this.publicadoExitosamente
         })
         .catch((error) => {
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 40,
     marginTop: 10,
-    width: "46%", 
+    width: "46%",
     display: 'flex',
     justifyContent: 'center',
     alignSelf: 'center'

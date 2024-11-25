@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import React, { Component } from "react";
 import { db, auth } from "../firebase/config";
 import Like from "../components/Like";
@@ -12,7 +12,11 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    console.log("Se montó mi componente");
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.props.navigation.navigate('logueado')
+      }
+    })
 
     db
       .collection("posts")
@@ -35,12 +39,12 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Occogram posts</Text>
-        <FlatList 
-          data={this.state.posteos} 
-          keyExtractor={(item) => item.id.toString()} 
-          numColumns={2} 
+        <FlatList
+          data={this.state.posteos}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2}
           renderItem={({ item }) => (
-            <Like item={item}/>
+            <Like item={item} />
           )}
         />
       </View>
@@ -69,8 +73,8 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 10,
     borderRadius: 10,
-    flex: 1, 
-    marginHorizontal: 5, 
+    flex: 1,
+    marginHorizontal: 5,
   },
   email: {
     fontSize: 12,
