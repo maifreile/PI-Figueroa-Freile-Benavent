@@ -17,8 +17,7 @@ export default class Profile extends Component {
     if (currentUserEmail) {
       console.log('Usuario actual:', currentUserEmail);
 
-      // Obtiene la info del usuario
-      db.collection('users')
+          db.collection('users')
         .where('owner', '==', currentUserEmail)
         .onSnapshot((docs) => {
           let arrDocs = [];
@@ -32,7 +31,7 @@ export default class Profile extends Component {
           this.setState({ userInfo: arrDocs });
         });
 
-      // Obtiene las publicaciones del usuario
+     
       db.collection('posts')
         .where('owner', '==', currentUserEmail)
         .onSnapshot((docs) => {
@@ -51,7 +50,6 @@ export default class Profile extends Component {
     }
   }
 
-  // Eliminar publicación
   deletePost = (postId) => {
     db.collection('posts')
       .doc(postId)
@@ -62,17 +60,14 @@ export default class Profile extends Component {
       .catch((error) => console.error('Error al eliminar publicación:', error));
   };
 
-  // Cerrar sesión
   SignOut = () => {
     auth
       .signOut()
       .then(() => {
-        // Limpia el estado
         this.setState({
           userInfo: [],
           userPosts: [],
         });
-        // Redirige al login
         this.props.navigation.replace('login');
       })
       .catch((error) => {
@@ -85,13 +80,12 @@ export default class Profile extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Perfil</Text>
 
-
         {this.state.userInfo.length > 0 && (
           <>
             <Text style={styles.username}>
               {this.state.userInfo[0].data.username}
             </Text>
-            <Text style={styles.username}>
+            <Text style={styles.email}>
               {this.state.userInfo[0].data.owner}
             </Text>
           </>
@@ -100,7 +94,6 @@ export default class Profile extends Component {
         <Text style={styles.postCount}>
           Cantidad de publicaciones: {this.state.userPosts.length}
         </Text>
-
 
         <FlatList
           data={this.state.userPosts}
@@ -118,7 +111,6 @@ export default class Profile extends Component {
           )}
         />
 
-
         <TouchableOpacity style={styles.signOutButton} onPress={this.SignOut}>
           <Text style={styles.signOutButtonText}>Cerrar sesión</Text>
         </TouchableOpacity>
@@ -130,23 +122,29 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', 
     alignItems: 'center',
     backgroundColor: '#f0f4f8',
     padding: 20,
+    paddingTop: 50, 
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: '#5e35b1',
+    color: 'rgb(94, 53, 177)', 
     textAlign: 'center',
   },
   username: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2980b9',
+    color: 'rgb(94, 53, 177)', 
     marginBottom: 10,
+  },
+  email: {
+    fontSize: 16,
+    color: 'rgba(94, 53, 177, 0.7)', 
+    marginBottom: 20,
   },
   postCount: {
     fontSize: 16,
@@ -190,3 +188,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
