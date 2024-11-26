@@ -134,10 +134,12 @@ export default class FormularioRegister extends Component {
                     {this.state.error ? <Text style={styles.errorText}>{this.state.error}</Text> : null}
 
                     <TouchableOpacity
-                        style={styles.button}
+                        style={[
+                            styles.button,
+                            this.validacionForm() ? styles.buttonEnabled : styles.buttonDisabled,
+                        ]}
                         disabled={!this.validacionForm()}
-                        onPress={() => this.submit()}
-                    >
+                        onPress={() => this.submit()}>
                         <Text style={styles.buttonText}>Registrarme</Text>
                     </TouchableOpacity>
                 </View>
@@ -146,11 +148,9 @@ export default class FormularioRegister extends Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f0f4f8',
         padding: 20,
@@ -161,47 +161,60 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#bebebe',
         borderRadius: 8,
-        padding: 50,
+        padding: 30,
+        marginBottom: 60, 
     },
     title: {
         textAlign: 'center',
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: 'bold',
         color: '#5e35b1',
-        marginBottom: 20,
+        marginBottom: 15,
     },
     subtitle: {
-        fontSize: 18,
+        fontSize: 16,
         textAlign: 'center',
         color: '#7f7f7f',
-        marginBottom: 20,
+        marginBottom: 15,
     },
     input: {
-        height: 50,
+        height: 45,
         width: '100%',
         paddingVertical: 10,
         paddingHorizontal: 15,
         borderWidth: 2,
-        borderColor: '#D3C6E5',
-        marginVertical: 10,
+        borderColor: '#D3C6E5', 
+        marginVertical: 8,
         borderRadius: 8,
         fontSize: 16,
-        backgroundColor: '#ffffff',
-        shadowColor: '#000',
+        backgroundColor: '#ffffff', 
+        color: '#000000',        
+         placeholderTextColor: '#7f7f7f', 
+           },
+    
+    button: {
+        position: 'relative', 
+        marginTop: 20, 
+        alignSelf: 'center',
+        width: '80%',
+        paddingVertical: 12,
+        borderRadius: 8,
+    },
+    buttonDisabled: {
+        backgroundColor: '#bfa2d8',
+    },
+    buttonEnabled: {
+        backgroundColor: 'rgb(94, 53, 177)',
     },
     buttonText: {
-        backgroundColor: '#bfa2d8',
-        paddingVertical: 15,
-        paddingHorizontal: 20,
-        textAlign: "center",
-        borderRadius: 8,
         color: '#fff',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
-        marginTop: 10,
+        textAlign: 'center',
     },
     errorText: {
         color: '#d32f2f',
-        marginVertical: 10,
+        marginVertical: 5,
+        fontSize: 12,
     },
 });
