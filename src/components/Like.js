@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     color: "#333",
     marginBottom: 10,
     textAlign: 'center'
+
   },
   likes: {
     fontSize: 12,
@@ -123,16 +124,18 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     borderRadius: 5,
     alignItems: "center",
-    width: '30%',
+    width: '40%',
     alignSelf: 'center'
   },
   botonDislike: {
     backgroundColor: "#808080",
     paddingVertical: 2,
+    paddingHorizontal: 10,
     borderRadius: 5,
     alignItems: "center",
-    width: '30%',
-    alignSelf: 'center'
+    width: '40%',
+    alignSelf: 'center',
+    
   },
   textoBotonLike: {
     color: "#fff",

@@ -15,6 +15,15 @@ export default class FormularioRegister extends Component {
             error: ''
         }
     }
+
+    componentDidMount() {
+        auth.onAuthStateChanged(user => {
+          if (user) {
+            this.props.navigation.navigate('logueado')
+          }
+        })
+      }
+
     //Voy hacer una validacion para cada categroia
     validacionEmail(email) {
         return email.includes('@');
@@ -31,11 +40,8 @@ export default class FormularioRegister extends Component {
     VerificarEmail() {
         const { email } = this.state;
 
-        if (email === '') {
-            this.setState({ errorEmail: 'El campo de email no puede estar vacío.' });
-            return false;
-        } else if (!this.validacionEmail(email)) {
-            this.setState({ errorEmail: 'Email debe utilizar un @.' });
+        if (!this.validacionEmail(email)) {
+            this.setState({ errorEmail: 'Ingrese un formato de email válido' });
             return false;
         } else {
             this.setState({ errorEmail: '' });
@@ -45,10 +51,7 @@ export default class FormularioRegister extends Component {
     VerificarPassword() {
         const { password } = this.state;
 
-        if (password === '') {
-            this.setState({ errorPassword: 'El campo de contraseña no puede estar vacío.' });
-            return false;
-        } else if (!this.validacionPassword(password)) {
+        if (!this.validacionPassword(password)) {
             this.setState({ errorPassword: 'La contraseña debe tener una longitud mínima de 5 caracteres.' });
             return false;
         } else {
@@ -60,10 +63,7 @@ export default class FormularioRegister extends Component {
     VerificarUsername() {
         const { username } = this.state;
 
-        if (username === '') {
-            this.setState({ errorUsername: 'El campo de username no puede estar vacío.' });
-            return false;
-        } else if (!this.validacionUsername(username)) {
+        if (!this.validacionUsername(username)) {
             this.setState({ errorUsername: 'El username debe tener al menos 2 caracteres.' });
             return false;
         } else {

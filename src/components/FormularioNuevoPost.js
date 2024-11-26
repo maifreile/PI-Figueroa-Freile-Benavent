@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 40,
     marginTop: 10,
-    width: "46%",
+    width: "100%",
     display: 'flex',
     justifyContent: 'center',
     alignSelf: 'center'

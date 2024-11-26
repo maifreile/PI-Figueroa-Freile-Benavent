@@ -26,8 +26,8 @@ export default class FormularioLogin extends Component {
       return
     }
 
-    if (password.lenght < 1) {
-      this.setState({ error: 'Ingrese una contraseña más larga' })
+    if (password.length < 1) {
+      this.setState({ error: 'Debe ingresar una contraseña' })
       return
     }
 
