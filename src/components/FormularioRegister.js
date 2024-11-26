@@ -143,6 +143,8 @@ export default class FormularioRegister extends Component {
                         <Text style={styles.buttonText}>Registrarme</Text>
                     </TouchableOpacity>
                 </View>
+                
+
             </View>
         );
     }
@@ -156,17 +158,16 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     formContainer: {
-        width: '90%',
+        width: '95%',
         backgroundColor: '#f0f4f8',
         borderWidth: 1,
         borderColor: '#bebebe',
-        borderRadius: 8,
-        padding: 30,
-        marginBottom: 60, 
+        borderRadius: 10,
+        padding: 25,
     },
     title: {
         textAlign: 'center',
-        fontSize: 28,
+        fontSize: 26,
         fontWeight: 'bold',
         color: '#5e35b1',
         marginBottom: 15,
@@ -178,23 +179,26 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     input: {
-        height: 45,
+        height: 40,
         width: '100%',
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        borderWidth: 2,
-        borderColor: '#D3C6E5', 
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderWidth: 1.5,
+        borderColor: '#D3C6E5',
         marginVertical: 8,
         borderRadius: 8,
         fontSize: 16,
-        backgroundColor: '#ffffff', 
-        color: '#000000',        
-         placeholderTextColor: '#7f7f7f', 
-           },
-    
+        fontFamily: ' BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;',
+        backgroundColor: '#f0f4f8',
+        color: '#000',
+    },
+    errorText: {
+        color: '#d32f2f',
+        fontSize: 12,
+        textAlign: 'left',
+    },
     button: {
-        position: 'relative', 
-        marginTop: 20, 
+        marginTop: 20,
         alignSelf: 'center',
         width: '80%',
         paddingVertical: 12,
@@ -212,9 +216,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    errorText: {
-        color: '#d32f2f',
-        marginVertical: 5,
-        fontSize: 12,
-    },
 });
+

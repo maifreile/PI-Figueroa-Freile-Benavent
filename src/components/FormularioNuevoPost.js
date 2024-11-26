@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   botonTexto: {
     color: "#fff",
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
   },
